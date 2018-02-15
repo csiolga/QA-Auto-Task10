@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CartTest {
+class CartTestWithJUnit {
     Cart testCart;
     RealItem testRealItem;
     VirtualItem testVirtualItem;
@@ -15,6 +15,7 @@ class CartTest {
     @BeforeEach
     void setUp() {
         testCart = new Cart("test-cart");
+
         testRealItem = new RealItem();
         testRealItem.setName("BMW");
         testRealItem.setPrice(10500);
@@ -31,7 +32,7 @@ class CartTest {
 
     @Test
     @Tag("positive")
-    void getCartTotalPrice_Test(){
+    void verifyCartTotalPrice(){
         testCart.addRealItem(testRealItem);
         testCart.addVirtualItem(testVirtualItem);
 

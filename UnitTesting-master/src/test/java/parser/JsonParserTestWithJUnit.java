@@ -1,8 +1,11 @@
 package parser;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.testng.Assert;
 import shop.Cart;
 import parser.JsonParser;
 import parser.Parser;
@@ -14,47 +17,48 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class JsonParserTest {
+class JsonParserTestWithJUnit {
     Parser parser;
     Cart testCart;
 
     @BeforeEach
     void setUp() {
-      parser = new JsonParser();
+        parser = new JsonParser();
     }
 
     @AfterEach
-    void tearDown() {
-    }
+    void tearDown() {}
 
     @Test
     @Tag("positive")
-    void writeToFile_newFileCreated_test() {
+    void verifyNewFileCreated() {
         testCart = new Cart("test-cart");
         parser.writeToFile(testCart);
 
         Path filePath = Paths.get("src/main/resources/" + testCart.getCartName() + ".json");
 
-        assertTrue(Files.exists(filePath));
+        assertTrue(Files.exists(filePath), "src/main/resources/" + testCart.getCartName() + ".json file should be created");
     }
 
     @Test
     @Tag("positive")
-    void readFomFile_newCartContainsCorrectCartName_test() {
+    void verifyCartNameFromFile() {
         testCart = new Cart("test-cart1");
         parser.writeToFile(testCart);
 
-        Cart testCart2 = parser.readFromFile(new File("src/main/resources/" + testCart.getCartName() +  ".json"));
+        Cart newCartFromFile = parser.readFromFile(new File("src/main/resources/" + testCart.getCartName() +  ".json"));
 
-        assertEquals(testCart.getCartName(), testCart2.getCartName());
+        assertEquals(testCart.getCartName(), newCartFromFile.getCartName());
     }
 
     @Disabled
     @Test
     @Tag("exception")
-    void writeToFile_throwsFileNotFoundExceptionOnIncorrectFileName_Test() {
+    void verifyFileNotFoundExceptionThrownOnWritingToFile() {
         Throwable exception = assertThrows(FileNotFoundException.class,
                 ()->{
                     testCart = new Cart("?/|:*");
@@ -66,7 +70,7 @@ class JsonParserTest {
     @Tag("exception")
     @ValueSource(strings = { "src/main/resources/no-file.json", "", "src/main/resources",
             "src/main/resources/?/|:*.json", "src/main/resources/newFolder/test-cart.json" })
-    void readFromFile_throwsNoSuchFileExceptionOnIncorrectFilePath_Test(String filePath) {
+    void verifyNoSuchFileExceptionThrownOnReadingFromFile(String filePath) {
         Throwable exception = assertThrows(NoSuchFileException.class,
                 ()->{
                     testCart = parser.readFromFile(new File(filePath));

@@ -4,10 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class VirtualItemTest {
+class VirtualItemTestWithJUnit {
     String name;
     double price;
     double size;
@@ -26,7 +26,7 @@ class VirtualItemTest {
 
     @Test
     @Tag("positive")
-    void addVirtualItem_checkNamePriceSize() {
+    void verifyVirtualItemParameters() {
         testVirtualItem.setName(name);
         testVirtualItem.setPrice(price);
         testVirtualItem.setSizeOnDisk(size);

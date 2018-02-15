@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RealItemTest {
+class RealItemTestWithJUnit {
     String name;
     double price;
     double weight;
@@ -24,7 +24,7 @@ class RealItemTest {
 
     @Test
     @Tag("positive")
-    void addRealItem_convertToString_Test() {
+    void verifyRealItemParameters() {
         RealItem testRealItem = new RealItem();
         testRealItem.setName(name);
         testRealItem.setPrice(price);
