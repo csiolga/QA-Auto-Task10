@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Virtual Item class Tests" >
+    <parameter name="name"  value="Movie"/>
+    <parameter name="price"  value="10.5"/>
+    <parameter name="size"  value="1250.97"/>
+    <test name="Parameterized test" >
+        <classes>
+            <class name="shop.VirtualItemTestWithTestNG" />
+        </classes>
+    </test>
+</suite>

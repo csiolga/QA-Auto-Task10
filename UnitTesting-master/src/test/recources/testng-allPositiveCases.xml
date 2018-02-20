@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All positive tests" >
+    <test name="Positive">
+        <groups>
+            <run>
+                <include name="positive" />
+                <exclude name="exception" />
+            </run>
+        </groups>
+        <classes>
+            <class name="parser.JsonParserTestWithTestNG"/>
+            <class name="shop.CartTestWithTestNG"/>
+            <class name="shop.RealItemTestWithTestNG"/>
+            <class name="shop.VirtualItemTestWithTestNG"/>
+        </classes>
+    </test>
+</suite>
