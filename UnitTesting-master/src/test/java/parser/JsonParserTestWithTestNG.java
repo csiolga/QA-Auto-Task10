@@ -50,8 +50,8 @@ public class JsonParserTestWithTestNG {
 
     @Test(enabled = false, groups = { "exception" }, expectedExceptions = FileNotFoundException.class)
     public void verifyFileNotFoundExceptionThrownOnWritingToFile() {
-                    testCart = new Cart("?/|:*");
-                    parser.writeToFile(testCart);
+        testCart = new Cart("?/|:*");
+        parser.writeToFile(testCart);
     }
 
     @DataProvider(name = "filePath")
@@ -62,6 +62,6 @@ public class JsonParserTestWithTestNG {
 
     @Test(groups = { "exception" }, dataProvider = "filePath", expectedExceptions = NoSuchFileException.class)
     public void verifyNoSuchFileExceptionThrownOnReadingFromFile(String filePath) {
-                    testCart = parser.readFromFile(new File(filePath));
+        testCart = parser.readFromFile(new File(filePath));
     }
 }
